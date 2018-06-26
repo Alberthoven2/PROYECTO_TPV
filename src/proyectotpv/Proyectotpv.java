@@ -21,7 +21,7 @@ public class Proyectotpv extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        System.out.println("Prueba de modificacion con push");
+        System.out.println("Segunda prueba de modificacion con push");
     }
 
     /**
