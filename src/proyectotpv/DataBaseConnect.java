@@ -20,7 +20,7 @@ public class DataBaseConnect {
     
     public DataBaseConnect(){
         
-        this.ruta = "jdbc:mysql://localhost:3306/TPV";
+        this.ruta = "jdbc:mysql://localhost:3306/tpv";
         this.usuario = "root";
         this.password = "";
         try{
@@ -28,6 +28,7 @@ public class DataBaseConnect {
             System.out.println("Conectado!!");
         }catch(SQLException sqle){
             sqle.getStackTrace();
+            System.out.println("Error!!");
         }
     }
     
