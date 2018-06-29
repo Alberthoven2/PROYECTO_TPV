@@ -20,11 +20,12 @@ public class DataBaseConnect {
     
     public DataBaseConnect(){
         
-        this.ruta = "jdbc:mysql://localhost:3306/myjavaapp1";
+        this.ruta = "jdbc:mysql://localhost:3306/TPV";
         this.usuario = "root";
         this.password = "";
         try{
             con = DriverManager.getConnection(ruta, usuario,password);
+            System.out.println("Conectado!!");
         }catch(SQLException sqle){
             sqle.getStackTrace();
         }

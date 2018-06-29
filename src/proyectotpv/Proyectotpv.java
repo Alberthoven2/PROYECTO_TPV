@@ -22,6 +22,7 @@ public class Proyectotpv extends Application {
     @Override
     public void start(Stage primaryStage) {
         System.out.println("Segunda prueba de modificacion con push");
+        DataBaseConnect dbc = new DataBaseConnect();
     }
 
     /**
