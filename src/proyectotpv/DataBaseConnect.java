@@ -6,6 +6,7 @@
 package proyectotpv;
 
 import java.sql.*;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,28 +16,22 @@ import java.util.logging.Logger;
  */
 public class DataBaseConnect {
     
-    String ruta;
-    String usuario;
-    String password;
-    Connection con;
-    Statement state;
-    ResultSet result;
+    private static final String RUTA = "jdbc:mysql://localhost:3306/TPV";
+    private static final String USUARIO = "root";
+    private static final String PASS = "";
+    private Connection con;
+    private Statement state;
+    private ResultSet result;
     
     public DataBaseConnect(){
         
-        this.ruta = "jdbc:mysql://localhost:3306/tpv";
-        this.usuario = "root";
-        this.password = "";
         try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection(ruta, usuario, password);
+            con = DriverManager.getConnection(RUTA, USUARIO, PASS);
             System.out.println("Conectado!!");
         }catch(SQLException sqle){
-            sqle.getStackTrace();
+            System.out.println(Arrays.toString(sqle.getStackTrace()));
             System.out.println("Error!!");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DataBaseConnect.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
     
 }
