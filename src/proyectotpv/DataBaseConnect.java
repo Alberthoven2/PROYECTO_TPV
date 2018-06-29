@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class DataBaseConnect {
     
-    private static final String RUTA = "jdbc:mysql://localhost:3306/TPV";
+    private static final String RUTA = "jdbc:mysql://localhost:3306/tpv?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     private static final String USUARIO = "root";
     private static final String PASS = "";
     private Connection con;
@@ -25,13 +25,13 @@ public class DataBaseConnect {
     
     public DataBaseConnect(){
         
-        try{
+        try {
             con = DriverManager.getConnection(RUTA, USUARIO, PASS);
             System.out.println("Conectado!!");
-        }catch(SQLException sqle){
-            System.out.println(Arrays.toString(sqle.getStackTrace()));
-            System.out.println("Error!!");
-        } 
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnect.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error en la conexión!");
+        }
     }
     
 }
