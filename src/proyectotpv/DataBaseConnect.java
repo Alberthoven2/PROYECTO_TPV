@@ -6,7 +6,6 @@
 package proyectotpv;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,10 +33,10 @@ public class DataBaseConnect {
         }
     }
     
-    public ResultSet cargaCamareros(){
+    protected ResultSet cargaCamareros(){
         try {
             
-            String SQL = "SELECT nombre, primer_ape FROM camarero";
+            String SQL = "SELECT id, nombre, primer_ape FROM camarero";
             state = con.createStatement();
             result = state.executeQuery(SQL);
             
@@ -47,10 +46,10 @@ public class DataBaseConnect {
         return result;
     }
     
-    public ResultSet cargaMesas(){
+    protected ResultSet cargaMesas(){
         try {
             
-            String SQL = "SELECT nombre FROM mesa";
+            String SQL = "SELECT id, nombre FROM mesa";
             state = con.createStatement();
             result = state.executeQuery(SQL);
             
@@ -60,39 +59,41 @@ public class DataBaseConnect {
         return result;
     }
     
-    public boolean crearTiquet(String idMesa, String idCamarero){
+    protected boolean crearTiquet(int idMesa, int idCamarero){
+        
+        int rows = 0;
         try {
             
             String SQL = "INSERT INTO tiquet (id_mesa, id_camarero) " +
                     "VALUES " +
-                    "("+ idMesa +", "+ idCamarero +"";
+                    "("+ idMesa +", "+ idCamarero +")";
             state = con.createStatement();
-            result = state.executeQuery(SQL);
+            rows = state.executeUpdate(SQL);
+            if(rows != 0) return true;
             
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
+        
+        return rows != 0;
     }
     
     //Todavía hay que implementar este metodo, no está terminado
-    public boolean cerrarTiquet(String idTiquet){
-        
-        Timestamp ts = Timestamp.valueOf(LocalDateTime.now());
-        
+    protected boolean cerrarTiquet(int idTiquet){
+        int rows = 0;
         try {
             
-            String SQL = "UPDATE tiquet SET fecha_cierre = '"+ ts.getTime() +"' WHERE id = "+ idTiquet +"";
+            String SQL = "UPDATE tiquet SET fecha_cierre = CURRENT_TIMESTAMP WHERE id = "+ idTiquet;
             state = con.createStatement();
-            result = state.executeQuery(SQL);
-            
+            rows = state.executeUpdate(SQL);
+            if(rows != 0) return true;
         } catch (SQLException ex) {
             Logger.getLogger(DataBaseConnect.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return true;
+        return rows != 0;
     }
-    
-    public boolean reabrirTiquet(String idTiquet){
+    //De momento no estoy usando este método.
+    protected boolean reabrirTiquet(String idTiquet){
         try {
             
             String SQL = "UPDATE tiquet SET fecha_cierre = null WHERE id = "+ idTiquet +"";
@@ -105,13 +106,13 @@ public class DataBaseConnect {
         return true;
     }
     
-    public boolean comprobarMesa(String nombreMesa){
+    protected boolean comprobarMesa(String nombreMesa){
         
         boolean existeMesa = false, mesaOcupada = false;
         
         try {
             
-            String SQL = "SELECT * FROM tiquet WHERE id_mesa = ( SELECT mesa.id FROM mesa WHERE nombre LIKE '"+ nombreMesa +"')";
+            String SQL = "SELECT * FROM tiquet WHERE fecha_cierre is null AND id_mesa = ( SELECT mesa.id FROM mesa WHERE nombre LIKE '"+ nombreMesa +"')";
             String SQL2 = "";
             state = con.createStatement();
             result = state.executeQuery(SQL);
@@ -132,7 +133,44 @@ public class DataBaseConnect {
         return existeMesa && mesaOcupada;
     }
     
-    public void closeConnection(){
+    protected ResultSet getDatosTabla(int idTiquet){
+        try {
+            
+            String SQL = "SELECT  t.id as 'id_tiquet', p.id as 'id_producto', " +
+                    "p.nombre_producto, p.precio_unidad, tp.cantidad, ROUND(tp.cantidad * p.precio_unidad, 2) as 'total' " +
+                    "FROM " +
+                    "tiquet t INNER JOIN tiquet_producto tp " +
+                    "ON t.id = tp.id_tiquet " +
+                    "INNER JOIN producto p " +
+                    "ON p.id = tp.id_producto " +
+                    "WHERE t.id = "+ idTiquet;
+            state = con.createStatement();
+            result = state.executeQuery(SQL);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
+    
+    protected int compruebaTiquet(int idMesa, int idCamarero){
+        int idTiquet = 0;
+        try {
+            
+            String SQL = "SELECT id FROM tiquet WHERE id_mesa = "+ idMesa +" AND id_camarero = "+ idCamarero +" AND fecha_cierre is null";
+            state = con.createStatement();
+            result = state.executeQuery(SQL);
+            
+            if(result.next()) idTiquet = result.getInt("id");
+            else idTiquet = 0;
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(DataBaseConnect.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return idTiquet;
+    }
+    
+    protected void closeConnection(){
         try {
             con.close();
         } catch (SQLException ex) {

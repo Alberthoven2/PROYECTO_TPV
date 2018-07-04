@@ -11,11 +11,12 @@ import java.util.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JComboBox;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -29,6 +30,8 @@ public class FormPrincipal extends javax.swing.JFrame {
      */
     DataBaseConnect dbc = new DataBaseConnect();
     DateFormat df = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+    private int[] indiceMesas;
+    private int[] indiceCamareros;
     
     
     Timer timer = new Timer(1000, new ActionListener() {
@@ -76,13 +79,54 @@ public class FormPrincipal extends javax.swing.JFrame {
         lblTotalTiquet = new javax.swing.JLabel();
         pnlTabProductos = new javax.swing.JTabbedPane();
         pnlComidas = new javax.swing.JPanel();
+        jButton37 = new javax.swing.JButton();
+        jButton38 = new javax.swing.JButton();
+        jButton39 = new javax.swing.JButton();
+        jButton40 = new javax.swing.JButton();
+        jButton41 = new javax.swing.JButton();
+        jButton42 = new javax.swing.JButton();
+        jButton43 = new javax.swing.JButton();
+        jButton44 = new javax.swing.JButton();
+        jButton45 = new javax.swing.JButton();
+        jButton46 = new javax.swing.JButton();
+        jButton47 = new javax.swing.JButton();
+        jButton48 = new javax.swing.JButton();
         pnlBebidas = new javax.swing.JPanel();
+        jButton13 = new javax.swing.JButton();
+        jButton14 = new javax.swing.JButton();
+        jButton15 = new javax.swing.JButton();
+        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
         pnlPostres = new javax.swing.JPanel();
+        jButton25 = new javax.swing.JButton();
+        jButton26 = new javax.swing.JButton();
+        jButton27 = new javax.swing.JButton();
+        jButton28 = new javax.swing.JButton();
+        jButton29 = new javax.swing.JButton();
+        jButton30 = new javax.swing.JButton();
+        jButton31 = new javax.swing.JButton();
+        jButton32 = new javax.swing.JButton();
+        jButton33 = new javax.swing.JButton();
+        jButton34 = new javax.swing.JButton();
+        jButton35 = new javax.swing.JButton();
+        jButton36 = new javax.swing.JButton();
         pnlAdmin = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cmbCamarero.setToolTipText("Elije camarero");
+        cmbCamarero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCamareroActionPerformed(evt);
+            }
+        });
 
         cmbMesa.setToolTipText("Elije mesa");
         cmbMesa.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +136,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
 
         btnAbrirTiquet.setText("Abrir tiquet");
+        btnAbrirTiquet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAbrirTiquetActionPerformed(evt);
+            }
+        });
 
         chbTiquet.setText("Ocupada");
         chbTiquet.setEnabled(false);
@@ -103,22 +152,27 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         btnCargarTiquet.setText("Cargar Tiquet");
         btnCargarTiquet.setActionCommand("");
+        btnCargarTiquet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarTiquetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlOpcionesLayout = new javax.swing.GroupLayout(pnlOpciones);
         pnlOpciones.setLayout(pnlOpcionesLayout);
         pnlOpcionesLayout.setHorizontalGroup(
             pnlOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOpcionesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cmbCamarero, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(cmbCamarero, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53)
-                .addComponent(cmbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addComponent(cmbMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(chbTiquet)
                 .addGap(18, 18, 18)
-                .addComponent(btnAbrirTiquet, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnCargarTiquet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAbrirTiquet, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCargarTiquet, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         pnlOpcionesLayout.setVerticalGroup(
@@ -136,23 +190,24 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         tblTiquet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Producto", "Precio/Unidad", "Cantidad", "Total"
+                "id_producto", "id_tiquet", "Producto", "Precio/Unidad", "Cantidad", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -162,15 +217,21 @@ public class FormPrincipal extends javax.swing.JFrame {
         tblTiquet.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tblTiquet);
         if (tblTiquet.getColumnModel().getColumnCount() > 0) {
-            tblTiquet.getColumnModel().getColumn(0).setResizable(false);
-            tblTiquet.getColumnModel().getColumn(1).setResizable(false);
+            tblTiquet.getColumnModel().getColumn(0).setMinWidth(0);
+            tblTiquet.getColumnModel().getColumn(0).setPreferredWidth(0);
+            tblTiquet.getColumnModel().getColumn(0).setMaxWidth(0);
+            tblTiquet.getColumnModel().getColumn(1).setMinWidth(0);
+            tblTiquet.getColumnModel().getColumn(1).setPreferredWidth(0);
+            tblTiquet.getColumnModel().getColumn(1).setMaxWidth(0);
+            tblTiquet.getColumnModel().getColumn(2).setResizable(false);
+            tblTiquet.getColumnModel().getColumn(3).setResizable(false);
+            tblTiquet.getColumnModel().getColumn(4).setResizable(false);
+            tblTiquet.getColumnModel().getColumn(5).setResizable(false);
         }
 
         lblHoraYFecha.setText("jLabel2");
 
         jLabel1.setText("Numero de tiquet: ");
-
-        lblNumTiquet.setText("jLabel2");
 
         btnAñadeProducto.setText("+");
         btnAñadeProducto.setToolTipText("Añadir 1");
@@ -179,6 +240,11 @@ public class FormPrincipal extends javax.swing.JFrame {
         btnQuitaProducto.setToolTipText("Quitar 1");
 
         btnCerrarTiquet.setText("CERRAR TIQUET");
+        btnCerrarTiquet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarTiquetActionPerformed(evt);
+            }
+        });
 
         btnEliminaFilaTabla.setText("ELIMINAR LA FILA SELECCIONADA");
 
@@ -218,7 +284,7 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addGroup(pnlTablaLayout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                         .addComponent(lblTotalTiquet, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -248,41 +314,273 @@ public class FormPrincipal extends javax.swing.JFrame {
                     .addComponent(btnCerrarTiquet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
+        jButton37.setText("jButton1");
+
+        jButton38.setText("jButton1");
+
+        jButton39.setText("jButton1");
+
+        jButton40.setText("jButton1");
+
+        jButton41.setText("jButton1");
+
+        jButton42.setText("jButton1");
+
+        jButton43.setText("jButton1");
+
+        jButton44.setText("jButton1");
+
+        jButton45.setText("jButton1");
+
+        jButton46.setText("jButton1");
+
+        jButton47.setText("jButton1");
+
+        jButton48.setText("jButton1");
+
         javax.swing.GroupLayout pnlComidasLayout = new javax.swing.GroupLayout(pnlComidas);
         pnlComidas.setLayout(pnlComidasLayout);
         pnlComidasLayout.setHorizontalGroup(
             pnlComidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGroup(pnlComidasLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlComidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlComidasLayout.createSequentialGroup()
+                        .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlComidasLayout.createSequentialGroup()
+                        .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         pnlComidasLayout.setVerticalGroup(
             pnlComidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGroup(pnlComidasLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(pnlComidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton38, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton39, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton42, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton43, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton46, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton47, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(pnlComidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton41, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton37, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton40, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton44, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton45, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton48, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pnlTabProductos.addTab("Comidas", pnlComidas);
+
+        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Coca-cola-light.jpg"))); // NOI18N
+        jButton13.setText("jButton1");
+        jButton13.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Coca-cola.jpg"))); // NOI18N
+        jButton14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton14.setLabel("");
+
+        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Kas-limon.jpg"))); // NOI18N
+        jButton15.setText("jButton1");
+        jButton15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_acuarius.jpg"))); // NOI18N
+        jButton16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton16.setLabel("");
+
+        jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Coca-cola-zero.jpg"))); // NOI18N
+        jButton17.setText("jButton1");
+        jButton17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Fanta-naranja.jpg"))); // NOI18N
+        jButton18.setText("jButton1");
+        jButton18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_nesteea.jpg"))); // NOI18N
+        jButton19.setText("jButton1");
+        jButton19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Kas-naranja.jpg"))); // NOI18N
+        jButton20.setText("jButton1");
+        jButton20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_agua-1,5l.jpg"))); // NOI18N
+        jButton21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton21.setLabel("");
+
+        jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Fanta-limon.jpg"))); // NOI18N
+        jButton22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton22.setLabel("");
+
+        jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_agua 500ml.jpg"))); // NOI18N
+        jButton23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton23.setLabel("");
+
+        jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_acuarius-naranja.jpg"))); // NOI18N
+        jButton24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton24.setLabel("");
 
         javax.swing.GroupLayout pnlBebidasLayout = new javax.swing.GroupLayout(pnlBebidas);
         pnlBebidas.setLayout(pnlBebidasLayout);
         pnlBebidasLayout.setHorizontalGroup(
             pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGap(0, 650, Short.MAX_VALUE)
+            .addGroup(pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlBebidasLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlBebidasLayout.createSequentialGroup()
+                            .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                            .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlBebidasLayout.createSequentialGroup()
+                            .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap()))
         );
         pnlBebidasLayout.setVerticalGroup(
             pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 230, Short.MAX_VALUE)
+            .addGroup(pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnlBebidasLayout.createSequentialGroup()
+                    .addGap(19, 19, 19)
+                    .addGroup(pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                    .addGroup(pnlBebidasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(20, 20, 20)))
         );
 
         pnlTabProductos.addTab("Bebidas", pnlBebidas);
+
+        jButton25.setText("jButton1");
+
+        jButton26.setText("jButton1");
+
+        jButton27.setText("jButton1");
+
+        jButton28.setText("jButton1");
+
+        jButton29.setText("jButton1");
+
+        jButton30.setText("jButton1");
+
+        jButton31.setText("jButton1");
+
+        jButton32.setText("jButton1");
+
+        jButton33.setText("jButton1");
+
+        jButton34.setText("jButton1");
+
+        jButton35.setText("jButton1");
+
+        jButton36.setText("jButton1");
 
         javax.swing.GroupLayout pnlPostresLayout = new javax.swing.GroupLayout(pnlPostres);
         pnlPostres.setLayout(pnlPostresLayout);
         pnlPostresLayout.setHorizontalGroup(
             pnlPostresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 628, Short.MAX_VALUE)
+            .addGroup(pnlPostresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlPostresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlPostresLayout.createSequentialGroup()
+                        .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlPostresLayout.createSequentialGroup()
+                        .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         pnlPostresLayout.setVerticalGroup(
             pnlPostresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+            .addGroup(pnlPostresLayout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(pnlPostresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton29, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton32, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addGroup(pnlPostresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton28, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton34, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton36, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton35, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton33, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
         );
 
         pnlTabProductos.addTab("Postres", pnlPostres);
@@ -332,19 +630,83 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     private void cmbMesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMesaActionPerformed
         // TODO add your handling code here:
-        String nombreMesa = cmbMesa.getSelectedItem().toString();
-        System.out.println(nombreMesa);
-        boolean estado = dbc.comprobarMesa(nombreMesa);
-        System.out.println(estado);
-        chbTiquet.setSelected(estado);
-        btnAbrirTiquet.setEnabled(!estado);
-        btnCargarTiquet.setEnabled(estado);
+        
+        if(cmbMesa.getSelectedIndex() != 0 && cmbCamarero.getSelectedIndex() != 0){
+            String nombreMesa = cmbMesa.getSelectedItem().toString();
+            System.out.println(nombreMesa);
+            boolean estado = dbc.comprobarMesa(nombreMesa);
+            System.out.println(estado);
+            System.out.println(cmbMesa.getSelectedIndex());
+            chbTiquet.setSelected(estado);
+            btnAbrirTiquet.setEnabled(!estado);
+            btnCargarTiquet.setEnabled(estado);
+            int num = dbc.compruebaTiquet(indiceMesas[cmbMesa.getSelectedIndex()], indiceCamareros[cmbCamarero.getSelectedIndex()]);
+            if(num != 0){
+                lblNumTiquet.setText(String.valueOf(num));
+            }else{
+                lblNumTiquet.setText("");
+            }
+        }
+ 
     }//GEN-LAST:event_cmbMesaActionPerformed
 
     private void chbTiquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chbTiquetActionPerformed
         // TODO add your handling code here:
         
     }//GEN-LAST:event_chbTiquetActionPerformed
+
+    private void btnCargarTiquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarTiquetActionPerformed
+        // TODO add your handling code here:
+        if(!"".equals(lblNumTiquet.getText())){
+            actualizarTabla(Integer.parseInt(lblNumTiquet.getText()));
+        }
+        
+    }//GEN-LAST:event_btnCargarTiquetActionPerformed
+
+    private void btnAbrirTiquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAbrirTiquetActionPerformed
+        // TODO add your handling code here:
+        if(dbc.crearTiquet(indiceMesas[cmbMesa.getSelectedIndex()], indiceCamareros[cmbCamarero.getSelectedIndex()])){
+            lblNumTiquet.setText(String.valueOf(dbc.compruebaTiquet(indiceMesas[cmbMesa.getSelectedIndex()], indiceCamareros[cmbCamarero.getSelectedIndex()])));
+            btnAbrirTiquet.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnAbrirTiquetActionPerformed
+
+    private void cmbCamareroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCamareroActionPerformed
+        // TODO add your handling code here:
+        if(cmbMesa.getSelectedIndex() != 0 && cmbCamarero.getSelectedIndex() != 0){
+            String nombreMesa = cmbMesa.getSelectedItem().toString();
+            System.out.println(nombreMesa);
+            boolean estado = dbc.comprobarMesa(nombreMesa);
+            System.out.println(estado);
+            System.out.println(cmbMesa.getSelectedIndex());
+            chbTiquet.setSelected(estado);
+            btnAbrirTiquet.setEnabled(!estado);
+            btnCargarTiquet.setEnabled(estado);
+            int num = dbc.compruebaTiquet(indiceMesas[cmbMesa.getSelectedIndex()], indiceCamareros[cmbCamarero.getSelectedIndex()]);
+            if(num != 0){
+                lblNumTiquet.setText(String.valueOf(num));
+            }else{
+                lblNumTiquet.setText("");
+            }
+        }
+    }//GEN-LAST:event_cmbCamareroActionPerformed
+
+    private void btnCerrarTiquetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTiquetActionPerformed
+        // TODO add your handling code here:
+        boolean cerrado;
+        if(!lblNumTiquet.getText().equals("")){
+            cerrado = dbc.cerrarTiquet(Integer.parseInt(lblNumTiquet.getText()));
+            if(cerrado){
+                System.out.println("Cerrado!");
+                btnAbrirTiquet.setEnabled(!cerrado);
+                btnCerrarTiquet.setEnabled(cerrado);
+                lblNumTiquet.setText("");
+            }
+            else System.out.println("Error!");
+        }else{
+            System.out.println("No hay tiquet para cerrar!");
+        }
+    }//GEN-LAST:event_btnCerrarTiquetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -387,9 +749,18 @@ public class FormPrincipal extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             ResultSet r = dbc.cargaCamareros();
+            r.last();
+            indiceCamareros = new int[r.getRow() + 1];
+            r.beforeFirst();
+            cmbCamarero.addItem("Elije camarero");
+            indiceCamareros[0] = 0;
+            int i = 1;
             while(r.next()){
+                indiceCamareros[i] = r.getInt("id");
                 cmbCamarero.addItem(r.getString("nombre") + " " + r.getString("primer_ape"));
+                i++;
             }
+            
         } catch (SQLException ex) {
             Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -400,9 +771,53 @@ public class FormPrincipal extends javax.swing.JFrame {
         try {
             // TODO add your handling code here:
             ResultSet r = dbc.cargaMesas();
+            r.last();
+            indiceMesas = new int[r.getRow() + 1];
+            r.beforeFirst();
+            cmbMesa.addItem("Elije mesa");
+            indiceMesas[0] = 0;
+            int i = 1;
             while(r.next()){
+                indiceMesas[i] = r.getInt("id");
                 cmbMesa.addItem(r.getString("nombre"));
+                i++;
             }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void actualizarTabla(int idTiquet){
+        ResultSet r = dbc.getDatosTabla(idTiquet);
+        //tblTiquet.removeAll();
+        DefaultTableModel miModelo = (DefaultTableModel) tblTiquet.getModel();
+        float totalTiquet = 0;
+        try {
+            //System.out.println(r.last()+ " " + r.getRow());
+            for(int i = 0; i < miModelo.getRowCount() ; i++){
+                //System.out.println(r.last()+ " " + r.getRow());
+                miModelo.removeRow(0);
+            }
+            r.beforeFirst();
+            while(r.next()){
+                Object[] filas = new Object[6];
+                filas[0] = String.valueOf(r.getInt("id_tiquet"));
+                filas[1] = String.valueOf(r.getInt("id_producto"));
+                filas[2] = r.getString("nombre_producto");
+                filas[3] = String.valueOf(r.getFloat("precio_unidad"));
+                filas[4] = String.valueOf(r.getInt("cantidad"));
+                filas[5] = String.valueOf(r.getFloat("total"));
+                totalTiquet += Float.parseFloat(String.valueOf(filas[5]));
+                miModelo.addRow(filas);
+                //tblTiquet.setModel(miModelo);
+
+            }
+            DecimalFormat df = new DecimalFormat("#.00");
+            System.out.println(df.format(totalTiquet));
+            lblTotalTiquet.setText(String.valueOf(df.format(totalTiquet)));
+            tblTiquet.setModel(miModelo);
+
         } catch (SQLException ex) {
             Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -418,6 +833,42 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JCheckBox chbTiquet;
     private javax.swing.JComboBox<String> cmbCamarero;
     private javax.swing.JComboBox<String> cmbMesa;
+    private javax.swing.JButton jButton13;
+    private javax.swing.JButton jButton14;
+    private javax.swing.JButton jButton15;
+    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
+    private javax.swing.JButton jButton25;
+    private javax.swing.JButton jButton26;
+    private javax.swing.JButton jButton27;
+    private javax.swing.JButton jButton28;
+    private javax.swing.JButton jButton29;
+    private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
+    private javax.swing.JButton jButton34;
+    private javax.swing.JButton jButton35;
+    private javax.swing.JButton jButton36;
+    private javax.swing.JButton jButton37;
+    private javax.swing.JButton jButton38;
+    private javax.swing.JButton jButton39;
+    private javax.swing.JButton jButton40;
+    private javax.swing.JButton jButton41;
+    private javax.swing.JButton jButton42;
+    private javax.swing.JButton jButton43;
+    private javax.swing.JButton jButton44;
+    private javax.swing.JButton jButton45;
+    private javax.swing.JButton jButton46;
+    private javax.swing.JButton jButton47;
+    private javax.swing.JButton jButton48;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
