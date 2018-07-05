@@ -46,6 +46,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         initComponents();
         rellenarCmbCamarero();
         rellenarCmbMesa();
+        borrarTabla();
         timer.start();
     }
     
@@ -190,6 +191,43 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         tblTiquet.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -401,7 +439,6 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Coca-cola.jpg"))); // NOI18N
         jButton14.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton14.setLabel("");
 
         jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Kas-limon.jpg"))); // NOI18N
         jButton15.setText("jButton1");
@@ -409,7 +446,6 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_acuarius.jpg"))); // NOI18N
         jButton16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton16.setLabel("");
 
         jButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Coca-cola-zero.jpg"))); // NOI18N
         jButton17.setText("jButton1");
@@ -429,19 +465,15 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         jButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_agua-1,5l.jpg"))); // NOI18N
         jButton21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton21.setLabel("");
 
         jButton22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_Fanta-limon.jpg"))); // NOI18N
         jButton22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton22.setLabel("");
 
         jButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_agua 500ml.jpg"))); // NOI18N
         jButton23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton23.setLabel("");
 
         jButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proyectotpv/imagen productos/Bebidas/mini_acuarius-naranja.jpg"))); // NOI18N
         jButton24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton24.setLabel("");
 
         javax.swing.GroupLayout pnlBebidasLayout = new javax.swing.GroupLayout(pnlBebidas);
         pnlBebidas.setLayout(pnlBebidasLayout);
@@ -701,6 +733,8 @@ public class FormPrincipal extends javax.swing.JFrame {
                 btnAbrirTiquet.setEnabled(!cerrado);
                 btnCerrarTiquet.setEnabled(cerrado);
                 lblNumTiquet.setText("");
+                lblTotalTiquet.setText("0.0");
+                borrarTabla();
             }
             else System.out.println("Error!");
         }else{
@@ -792,13 +826,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         ResultSet r = dbc.getDatosTabla(idTiquet);
         //tblTiquet.removeAll();
         DefaultTableModel miModelo = (DefaultTableModel) tblTiquet.getModel();
+        int reg = Integer.parseInt(String.valueOf(tblTiquet.getRowCount()));
+        //System.out.println(r.last()+ " " + r.getRow());
+        for(int i = reg - 1; i >= 0; i--){
+            //System.out.println(r.last()+ " " + r.getRow());
+            miModelo.removeRow(i);
+        }
         float totalTiquet = 0;
         try {
-            //System.out.println(r.last()+ " " + r.getRow());
-            for(int i = 0; i < miModelo.getRowCount() ; i++){
-                //System.out.println(r.last()+ " " + r.getRow());
-                miModelo.removeRow(0);
-            }
             r.beforeFirst();
             while(r.next()){
                 Object[] filas = new Object[6];
@@ -821,6 +856,17 @@ public class FormPrincipal extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(FormPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private void borrarTabla(){
+        DefaultTableModel miModelo = (DefaultTableModel) tblTiquet.getModel();
+        
+        int reg = Integer.parseInt(String.valueOf(tblTiquet.getRowCount()));
+            //System.out.println(r.last()+ " " + r.getRow());
+            for(int i = reg - 1; i >= 0; i--){
+                //System.out.println(r.last()+ " " + r.getRow());
+                miModelo.removeRow(i);
+            }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

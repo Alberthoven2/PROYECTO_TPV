@@ -244,7 +244,7 @@
             <Component class="javax.swing.JTable" name="tblTiquet">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="6" rowCount="11">
+                  <Table columnCount="6" rowCount="48">
                     <Column editable="false" title="id_producto" type="java.lang.Object"/>
                     <Column editable="false" title="id_tiquet" type="java.lang.Object"/>
                     <Column editable="false" title="Producto" type="java.lang.Object"/>
@@ -576,7 +576,6 @@
                   <Image iconType="3" name="/proyectotpv/imagen productos/Bebidas/mini_Coca-cola.jpg"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="label" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton15">
@@ -594,7 +593,6 @@
                   <Image iconType="3" name="/proyectotpv/imagen productos/Bebidas/mini_acuarius.jpg"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="label" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton17">
@@ -639,7 +637,6 @@
                   <Image iconType="3" name="/proyectotpv/imagen productos/Bebidas/mini_agua-1,5l.jpg"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="label" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton22">
@@ -648,7 +645,6 @@
                   <Image iconType="3" name="/proyectotpv/imagen productos/Bebidas/mini_Fanta-limon.jpg"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="label" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton23">
@@ -657,7 +653,6 @@
                   <Image iconType="3" name="/proyectotpv/imagen productos/Bebidas/mini_agua 500ml.jpg"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="label" type="java.lang.String" value=""/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="jButton24">
@@ -666,7 +661,6 @@
                   <Image iconType="3" name="/proyectotpv/imagen productos/Bebidas/mini_acuarius-naranja.jpg"/>
                 </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
-                <Property name="label" type="java.lang.String" value=""/>
               </Properties>
             </Component>
           </SubComponents>

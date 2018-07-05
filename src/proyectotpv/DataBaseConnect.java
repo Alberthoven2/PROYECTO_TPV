@@ -170,6 +170,14 @@ public class DataBaseConnect {
         return idTiquet;
     }
     
+    protected boolean agregarProducto(int idTiquet, int idProducto){
+        return true;
+    }
+    
+    protected boolean agregarProducto(int idTiquet, int idProducto, int cantidad){
+        return true;
+    }
+    
     protected void closeConnection(){
         try {
             con.close();
